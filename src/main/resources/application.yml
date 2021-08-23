@@ -1,0 +1,27 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/mariadb
+    username: root
+    password: root
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MariaDBDialect
+
+security:
+  jwt:
+    secret: secret-value
+shop:
+  upload:
+    path: C:\update
+
+UserController:
+  signup: Creates user and returns its JWT token
+  signin: Authenticates user and returns its JWT token
+
+server:
+  port: 8080
