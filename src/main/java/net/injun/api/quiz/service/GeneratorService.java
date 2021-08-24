@@ -3,5 +3,4 @@ package net.injun.api.quiz.service;
 
 public interface GeneratorService {
     int randomFactor();
-
 }

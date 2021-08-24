@@ -12,7 +12,7 @@ public class GeneratorServiceImpl implements GeneratorService {
     public int randomFactor() {
         Function<String, Integer> function = Integer::parseInt;
         return new Random().nextInt(function.apply(Factor.MAXIMUM.toString())
-                - function.apply(Factor.MINIMUM.toString()) + 1
-                + function.apply(Factor.MINIMUM.toString()));
+                - function.apply(Factor.MINIMUN.toString()) + 1)
+                + function.apply(Factor.MINIMUN.toString());
     }
 }

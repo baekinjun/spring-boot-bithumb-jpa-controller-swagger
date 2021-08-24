@@ -1,13 +1,13 @@
 package net.injun.api.quiz.domain;
 
 public enum Factor {
-    MINIMUM , MAXIMUM;
+    MINIMUN, MAXIMUM;
 
     @Override
     public String toString() {
         String value = "";
         switch (this){
-            case MINIMUM:value = String.valueOf(11); break;
+            case MINIMUN:value = String.valueOf(11); break;
             case MAXIMUM:value = String.valueOf(99); break;
         }
         return value;
