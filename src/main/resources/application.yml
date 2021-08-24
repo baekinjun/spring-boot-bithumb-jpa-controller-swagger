@@ -14,8 +14,10 @@ spring:
 
 security:
   jwt:
-    secret: secret-value
-shop:
+    token:
+      security-key: secret-key
+      expiration-length: 3600000
+
   upload:
     path: C:\update
 
@@ -25,3 +27,5 @@ UserController:
 
 server:
   port: 8080
+
+

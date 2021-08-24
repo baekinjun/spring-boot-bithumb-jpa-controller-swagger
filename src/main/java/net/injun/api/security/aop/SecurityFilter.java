@@ -14,8 +14,8 @@ import java.io.IOException;
 public class SecurityFilter extends OncePerRequestFilter {
     private final SecurityProvider provider;
 
+    //jwt 토큰 필터링 맞으면 맞고 아니면 아니다.
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
     }
 }
