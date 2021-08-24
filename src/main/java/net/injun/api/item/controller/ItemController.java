@@ -16,7 +16,7 @@ import java.util.Optional;
 @Api
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "*")
+@CrossOrigin(origins = "*", allowCredentials = "false")
 @RequestMapping("/items")
 public class ItemController {
     private final ItemService itemService;
@@ -58,9 +58,9 @@ public class ItemController {
 
     @DeleteMapping
     //TODO:상태값 에 대한 메세징 엄청 강조 중요하다!
-    @ApiResponses(value = { @ApiResponse(code = 400, message = "Something went wrong"),
-                            @ApiResponse(code = 403, message = "Access Denied"),
-                            @ApiResponse(code = 422, message = "Username is alredy in use") })
+    @ApiResponses(value = {@ApiResponse(code = 400, message = "Something went wrong"),
+            @ApiResponse(code = 403, message = "Access Denied"),
+            @ApiResponse(code = 422, message = "Username is alredy in use")})
     public void deleteAll() {
         itemService.deleteAll();
     }
