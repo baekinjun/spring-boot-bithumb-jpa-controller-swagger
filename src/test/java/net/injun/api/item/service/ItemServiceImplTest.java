@@ -8,6 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringBootConfiguration;
 
 import java.util.List;
 
@@ -18,13 +20,14 @@ import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.verify;
 import static org.mockito.BDDMockito.given;
 
-
+@SpringBootConfiguration
 @ExtendWith(MockitoExtension.class)
 class ItemServiceImplTest {
+    @Autowired
     private ItemServiceImpl itemService;
     // jpa 는 new 를 만들수 없어 mock 객체를 만든다.
-    @Mock
-    ItemRepository itemRepository;
+    @Autowired // mock이 널로 처리되 메인것을 가져와서 테스트 한다.!
+    private ItemRepository itemRepository;
 
     @BeforeEach
     void setUp() {
@@ -35,8 +38,9 @@ class ItemServiceImplTest {
     @Test
     void findAll() {
         Item item = Item.builder().itemBrand("삼성").itemName("갤럭시").itemColor("흑색").build();
-        given(itemService.findAll().size()).willReturn(1);
-        assertThat(item.getItemName(),is(equalTo("갤럭시")));
+        assertThat(item.getItemName(), is(equalTo("갤럭시")));
+        itemService.save(item);
+        verify(itemRepository).save(item);
     }
 
     @Test

@@ -14,4 +14,6 @@ public interface OrderService {
     boolean existsById(long id);
     long count();
     void deleteById(long id);
+
+    void deleteAll();
 }
