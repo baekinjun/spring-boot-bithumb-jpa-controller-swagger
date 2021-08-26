@@ -15,7 +15,7 @@ import java.util.Optional;
 @Api(tags = "users")
 @RequiredArgsConstructor
 @RestController
-@CrossOrigin(origins = "*", allowCredentials = "*")
+@CrossOrigin(origins = "*", allowCredentials = "false")
 @RequestMapping("/users")
 public class UserController {
     private final UserServiceImpl userService;

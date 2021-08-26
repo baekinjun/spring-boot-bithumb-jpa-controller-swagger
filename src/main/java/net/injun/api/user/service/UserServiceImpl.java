@@ -26,7 +26,6 @@ public class UserServiceImpl extends Proxy implements UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final SecurityProvider provider;
-    private final AuthenticationManager manager;
     private final ModelMapper modelMapper;
 
     @Override
@@ -66,23 +65,22 @@ public class UserServiceImpl extends Proxy implements UserService {
 
     @Override
     public String signup(User user) {
-        if (!userRepository.existsByUsername(user.getUsername())) {
+        if(!userRepository.existsByUsername(user.getUsername())){
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            //롤을 여러개 주기 떄문에 리스트로 관리 한다.
             List<Role> list = new ArrayList<>();
             list.add(Role.USER);
             user.setRoles(list);
             userRepository.save(user);
             log.info("user" + user);
             return provider.createToken(user.getUsername(), user.getRoles());
-        } else {
-            throw new SecurityRuntimeException("중복된 ID 입니다.", HttpStatus.UNPROCESSABLE_ENTITY);
+        }else{
+            throw new SecurityRuntimeException("중복된 ID 입니다", HttpStatus.UNPROCESSABLE_ENTITY);
         }
     }
 
     @Override
     public UserDto signin(User user) {
-        try {
+        try{
             UserDto userDto = modelMapper.map(user, UserDto.class);
             String token = (passwordEncoder.matches(
                     user.getPassword(),
@@ -92,8 +90,8 @@ public class UserServiceImpl extends Proxy implements UserService {
             userDto.setToken(token);
             return userDto;
 
-        } catch (Exception e) {
-            throw new SecurityRuntimeException("유효하지 않은 아이디/비밀번호입니다.", HttpStatus.UNPROCESSABLE_ENTITY);
+        }catch (Exception e){
+            throw new SecurityRuntimeException("유효하지 않은 아이디 / 비밀번호", HttpStatus.UNPROCESSABLE_ENTITY);
         }
 
     }
